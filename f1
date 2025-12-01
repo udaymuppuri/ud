@@ -24,7 +24,7 @@ pipeline {
          stage('deploy') {
             steps {
                 echo "deploy"
-                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: '52047fb0-c99d-4194-b2a1-d46657f20b5d', path: '', url: 'http://localhost:8080/')], contextPath: 'onlinebookstore.war', war: '**/*.war'
+                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: '52047fb0-c99d-4194-b2a1-d46657f20b5d', path: '', url: 'http://localhost:8081/')], contextPath: 'onlinebookstore.war', war: '**/*.war'
             }
             
         }
