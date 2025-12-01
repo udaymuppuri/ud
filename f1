@@ -1,2 +1,32 @@
-this is the 1st one
-this is 2 nd  fie
+
+pipeline {
+    agent any
+    
+    tools {
+        jdk 'JDK17'
+        maven 'Maven'
+    }
+
+    stages {
+        stage('clone') {
+            steps {
+		git credentialsId: 'a54cdac5-6d8b-4d51-8993-5baddb4009b2', url: 'https://github.com/udaymuppuri/onlinebookstore.git'
+
+            }
+            
+        }
+         stage('Build') {
+            steps {
+                echo 'Hello Build'
+                bat 'mvn clean install'
+            }
+        }
+         stage('deploy') {
+            steps {
+                echo "deploy"
+                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: '52047fb0-c99d-4194-b2a1-d46657f20b5d', path: '', url: 'http://localhost:8080/')], contextPath: 'onlinebookstore.war', war: '**/*.war'
+            }
+            
+        }
+    }
+}
